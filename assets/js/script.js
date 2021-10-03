@@ -22,27 +22,7 @@ document.getElementById("currentDay").innerHTML = date;
 
 //end of current date section
 
-var tasks = {};
 
-
-// task text was clicked
-$(".list-group").on("click", "input", function() {
-    // get current text of p element
-    var text = $(this)
-      .text()
-      .trim();
-  
-    // replace input element with a new textarea
-    var textInput = $("<textarea>").addClass("form-control").val(text);
-    $(this).replaceWith(textInput);
-  
-    // auto focus new element
-    textInput.trigger("focus");
-  });
-
-  var saveTasks = function() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  };
 
 
   //check the current time and then add add color depending on time
