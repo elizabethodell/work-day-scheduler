@@ -44,22 +44,37 @@ $(".list-group").on("click", "input", function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   };
 
-  //checks time and adds color
-  var time = moment().format('HH');
 
-  console.log(time);
+  //check the current time and then add add color depending on time
+var checkTime = function () {
 
-  // remove any old classes from element
-  $(block).removeClass("past present future");
+    //Get Current time
+    var currentTime = moment().format('H');
+    console.log(currentTime)
 
-  // apply new class if the time is
-  if (moment(time).isAfter(time-1)) {
-    $(block).addClass("past");
-  } 
-  else if (moment(time).isSame(time)) {
-    $(block).addClass("present");
-  }
+    //get all elements with class "taskarea"
+    var timeBlockElements = $(".textarea");
 
-  else {
-    $(block).addClass("future");
-  }
+    //loop through taskarea classes
+    for (var i = 0 ; i < timeBlockElements.length ; i++) {
+
+        //Get element i's ID as a string
+        var elementID = timeBlockElements[i].id;
+
+        //get element by ID
+        var manipID = document.getElementById(timeBlockElements[i].id)
+
+        //remove any old classes from element
+        $(timeBlockElements[i].id).removeClass("present past future");
+
+        // apply new class if task is present/past/future
+        if (elementID < currentTime) {
+            $(manipID).addClass("past");
+        } else if (elementID > currentTime) {
+            $(manipID).addClass("future");
+        } else {
+            $(manipID).addClass("present");
+        }
+    }
+}
+checkTime();
