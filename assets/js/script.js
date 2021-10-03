@@ -19,4 +19,47 @@ var date = d_names[currentDay] + ", " + m_names[currentMonth] + " " +currentDate
 console.log(date);
 document.getElementById("currentDay").innerHTML = date;
 
+
 //end of current date section
+
+var tasks = {};
+
+
+// task text was clicked
+$(".list-group").on("click", "input", function() {
+    // get current text of p element
+    var text = $(this)
+      .text()
+      .trim();
+  
+    // replace input element with a new textarea
+    var textInput = $("<textarea>").addClass("form-control").val(text);
+    $(this).replaceWith(textInput);
+  
+    // auto focus new element
+    textInput.trigger("focus");
+  });
+
+  var saveTasks = function() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  };
+
+  //checks time and adds color
+  var time = moment().format('HH');
+
+  console.log(time);
+
+  // remove any old classes from element
+  $(block).removeClass("past present future");
+
+  // apply new class if the time is
+  if (moment(time).isAfter(time-1)) {
+    $(block).addClass("past");
+  } 
+  else if (moment(time).isSame(time)) {
+    $(block).addClass("present");
+  }
+
+  else {
+    $(block).addClass("future");
+  }
